@@ -148,26 +148,58 @@ import Card from "../components/ui/Card.vue";
           Bantu kamu dapat insight menarik dan edukasi seputar kucing
         </p>
 
-        <div class="article-cards">
-          <div class="card green">
-            <Card />
+       <div class="article-cards">
+
+        <Card class="green">
+          
+          <template #image>
             <img src="/artikel1.jpg" alt="Cara Merawat Kucing" />
+          </template>
+          
+          <template #title>
             <h3>Cara Merawat Kucing</h3>
-            <a href="artikel.html" class="read-more">Pelajari lebih lanjut →</a>
-          </div>
-
-          <div class="card blue">
+          </template>
+          
+          <template #content>
+            <p>Pelajari dasar-dasar merawat kucing agar tetap sehat...</p>
+          </template>
+          
+          <template #actions>
+            <RouterLink to="/articles/1" class="read-more">Pelajari lebih lanjut →</RouterLink>
+          </template>
+          
+        </Card> <Card class="blue">
+          <template #image>
             <img src="/artikel2.jpg" alt="Tips Kesehatan Kucing" />
+          </template>
+          <template #title>
             <h3>Tips Kesehatan Kucing</h3>
-            <a href="artikel.html" class="read-more">Pelajari lebih lanjut →</a>
-          </div>
+          </template>
+          <template #content>
+            <p>Tips singkat dan praktis untuk menjaga kesehatan anabul...</p>
+          </template>
+          <template #actions>
+            <RouterLink to="/articles/2" class="read-more">Pelajari lebih lanjut →</RouterLink>
+          </template>
+        </Card>
 
-          <div class="card blue">
+
+        <Card class="blue">
+          <template #image>
             <img src="/artikel3.avif" alt="Kucing & Lingkungan" />
+          </template>
+          <template #title>
             <h3>Kucing & Lingkungan</h3>
-            <a href="artikel.html" class="read-more">Pelajari lebih lanjut →</a>
-          </div>
-        </div>
+          </template>
+          <template #content>
+            <p>Pahami bagaimana lingkungan mempengaruhi kenyamanan kucing...</p>
+          </template>
+          <template #actions>
+            <RouterLink to="/articles/3" class="read-more">Pelajari lebih lanjut →</RouterLink>
+          </template>
+        </Card>
+        
+      </div>
         
       </section>
 
