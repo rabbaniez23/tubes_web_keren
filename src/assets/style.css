@@ -426,7 +426,7 @@ body {
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-items: flex-end;
     /* gap: 2rem; */
     margin-bottom: 2rem;
@@ -488,6 +488,7 @@ body {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    
 }
 
 .auth-container {
