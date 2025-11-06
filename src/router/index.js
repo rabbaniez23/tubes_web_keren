@@ -11,6 +11,7 @@ import LoginView from "../views/LoginView.vue";
 import ProfilView from "../views/ProfilView.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import AboutUsView from "../views/AboutUsView.vue";
+import LostCatView from "../views/LostCatView.vue";
 
 
 
@@ -22,6 +23,7 @@ const routes = [
   { path: "/donation", component: DonationView },
   { path: "/foster", component: FosterView },
   { path: "/report", component: ReportView },
+  { path: "/lost-cats", component: LostCatView },
   { path: "/signup", component: SignupView },
   { path: "/login", component: LoginView },
   { path: "/profile", component: ProfilView },
