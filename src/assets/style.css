@@ -511,7 +511,7 @@ body {
 }
 
 .auth-form-section {
-    padding: 3rem;
+    padding: rem;
     
 }
 
@@ -1442,6 +1442,7 @@ body {
 
     .auth-image-section {
         display: none;
+        
     }
 
     .articles-grid {
