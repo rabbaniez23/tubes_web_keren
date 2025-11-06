@@ -36,4 +36,24 @@ export default {
 
 <style scoped>
 .footer-bottom { text-align:center; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.2); }
+/* Layout HP (1 kolom) */
+@media (max-width: 768px) {
+  .footer-content {
+ 
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: flex-end;
+    /* gap: 2rem; */
+    margin-bottom: 2rem;
+
+  }
+}
+
+/* Style footer-bottom-mu */
+.footer-bottom { 
+  text-align:center; 
+  padding-top:1.5rem; 
+  border-top:1px solid rgba(255,255,255,0.2); 
+  color: #aaa;
+}
 </style>
