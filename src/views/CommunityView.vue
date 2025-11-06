@@ -1,30 +1,26 @@
 <template>
-<!-- <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <div class="logo">
-                    <a href="/">
-                        <span class="logo-icon">🐾</span>
-                        <span class="logo-text">Pet Rescue</span>
-                    </a>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/articles">Articles</a></li>
-                    <li><a href="/adoption">Adoption</a></li>
-                    <li><a href="/community" class="active">Community</a></li>
-                    <li><a href="/donation">Donate</a></li>
-                    <li><a href="/signup" class="btn-nav">Login</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header> -->
-
     <main>
         <section class="page-header">
             <div class="container">
-                <h1>Community Forum</h1>
-                <p>Connect with fellow pet lovers, share stories, and get advice</p>
+                <h1>Komunitas Pecinta Kucing</h1>
+                <p>Berbagi pengalaman, tips, dan terhubung dengan sesama pecinta kucing</p>
+                <div class="community-header-buttons">
+                    <div class="dropdown">
+                        <button id="category-btn" class="btn btn-primary btn-fulldrop">
+                            {{ selectedCategory }}
+                        </button>
+                        <div id="dropdown-menu" class="dropdown-menu">
+                            <a href="#" @click.prevent="selectCategory('Semua Kategori')">Semua Kategori</a>
+                            <a href="#" @click.prevent="selectCategory('Kesehatan')">Kesehatan</a>
+                            <a href="#" @click.prevent="selectCategory('Perawatan')">Perawatan</a>
+                            <a href="#" @click.prevent="selectCategory('Nutrisi')">Nutrisi</a>
+                            <a href="#" @click.prevent="selectCategory('Adopsi')">Adopsi</a>
+                            <a href="#" @click.prevent="selectCategory('Perilaku')">Perilaku</a>
+                            <a href="#" @click.prevent="selectCategory('Tips & Trik')">Tips & Trik</a>
+                        </div>
+                    </div>
+                        <button @click="showPopup = true" class="btn btn-primary btn-fulldrop">➕ Buat Post</button>
+                </div>
             </div>
         </section>
 
@@ -32,198 +28,615 @@
             <div class="container">
                 <div class="community-layout">
                     <div class="posts-container">
-                        <div class="post-card">
+                       <div class="post-card" v-for="(post, index) in filteredPosts" :key="index">
                             <div class="post-header">
                                 <div class="post-user">
-                                    <div class="user-avatar">S</div>
+                                    <div class="user-avatar">{{ post.avatar }}</div>
                                     <div class="user-info">
-                                        <h4>Sarah Johnson</h4>
-                                        <p class="post-time">2 hours ago</p>
+                                        <h4>{{ post.user }}</h4>
+                                        <p class="post-time">{{ post.tanggal }}</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="post-content">
-                                <h3>Just adopted my first rescue dog!</h3>
-                                <p>I'm so excited to share that I just brought home Max, a 3-year-old golden retriever mix. He's been through so much but is already showing so much love. Any tips for helping him adjust to his new home?</p>
-                            </div>
-                            <div class="post-footer">
-                                <span class="post-stat">💬 12 comments</span>
-                                <span class="post-stat">💚 45 likes</span>
+                            <div class="post-category-badge" :class="categoryClass(post.kategori)">
+                                {{ post.kategori }}
                             </div>
                         </div>
+                        <div class="post-content">
+                            <div class="text-content">
+                                <h3>{{ post.judul }}</h3>
+                                <p>{{ post.isi }}</p>
+                            </div>
+                            <div v-if="post.foto" class="post-image-container">
+                                <img :src="post.foto" :alt="post.judul" class="post-image" />
+                            </div>
+                        </div>
+                        
+                        <div class="post-footer">
+                            <span class="post-stat post-stat-clickable" @click="toggleComments(index)">
+                                <i class="fas fa-comment"></i> {{ post.balasan }} balasan
+                            </span>
+                            <span class="post-stat">
+                                <i class="fas fa-heart"></i> {{ post.suka }} suka
+                            </span>
+                        </div>
 
-                        <div class="post-card">
-                            <div class="post-header">
-                                <div class="post-user">
-                                    <div class="user-avatar">M</div>
-                                    <div class="user-info">
-                                        <h4>Michael Chen</h4>
-                                        <p class="post-time">5 hours ago</p>
+                            <div class="comment-section" v-if="activePostIndexForComments === index">
+                                <div class="comment-title">
+                                    <h4>{{ post.balasan }} Komentar</h4>
+                                </div>
+                                <div class="comment-list">
+                                    <div class="comment-item" v-for="(comment, cIndex) in post.comments" :key="cIndex">
+                                        <div class="comment-user-avatar">{{ comment.user.charAt(0) }}</div>
+                                        <div class="comment-body">
+                                            <strong>{{ comment.user }}:</strong> {{ comment.text }}
+                                        </div>
+                                    </div>
+                                    <div v-if="post.comments.length === 0" class="no-comments">
+                                        Belum ada balasan. Jadilah yang pertama berkomentar!
                                     </div>
                                 </div>
-                            </div>
-                            <div class="post-content">
-                                <h3>Foster care success story</h3>
-                                <p>After fostering Luna for 6 months, I officially adopted her today! She came to us scared and withdrawn, but now she's the most affectionate cat. Foster-to-adopt is such a wonderful program.</p>
-                            </div>
-                            <div class="post-footer">
-                                <span class="post-stat">💬 8 comments</span>
-                                <span class="post-stat">💚 67 likes</span>
-                            </div>
-                        </div>
-
-                        <div class="post-card">
-                            <div class="post-header">
-                                <div class="post-user">
-                                    <div class="user-avatar">E</div>
-                                    <div class="user-info">
-                                        <h4>Emily Rodriguez</h4>
-                                        <p class="post-time">1 day ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3>Question about senior dog care</h3>
-                                <p>I'm considering adopting a 10-year-old beagle. What should I know about caring for senior dogs? Are there specific health concerns I should be aware of? Would love to hear from experienced senior dog owners!</p>
-                            </div>
-                            <div class="post-footer">
-                                <span class="post-stat">💬 24 comments</span>
-                                <span class="post-stat">💚 31 likes</span>
-                            </div>
-                        </div>
-
-                        <div class="post-card">
-                            <div class="post-header">
-                                <div class="post-user">
-                                    <div class="user-avatar">D</div>
-                                    <div class="user-info">
-                                        <h4>David Thompson</h4>
-                                        <p class="post-time">2 days ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3>Volunteer experience at the shelter</h3>
-                                <p>Spent my Saturday volunteering at the local shelter. Walking dogs, cleaning kennels, and socializing with cats. It's hard work but so rewarding. If you're thinking about volunteering, I highly recommend it!</p>
-                            </div>
-                            <div class="post-footer">
-                                <span class="post-stat">💬 15 comments</span>
-                                <span class="post-stat">💚 89 likes</span>
-                            </div>
-                        </div>
-
-                        <div class="post-card">
-                            <div class="post-header">
-                                <div class="post-user">
-                                    <div class="user-avatar">L</div>
-                                    <div class="user-info">
-                                        <h4>Lisa Anderson</h4>
-                                        <p class="post-time">3 days ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <h3>Training tips that actually worked</h3>
-                                <p>After months of patience, my rescue dog finally mastered basic commands! Here's what worked for us: consistency, positive reinforcement, and lots of treats. Remember, every dog learns at their own pace.</p>
-                            </div>
-                            <div class="post-footer">
-                                <span class="post-stat">💬 19 comments</span>
-                                <span class="post-stat">💚 52 likes</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <aside class="community-sidebar">
-                        <div class="sidebar-card">
-                            <h3>Create New Post</h3>
-                            <form class="new-post-form">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Post title..." required>
-                                </div>
-                                <div class="form-group">
-                                    <textarea rows="4" placeholder="Share your thoughts..." required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-full">Post</button>
-                            </form>
-                        </div>
-
-                        <div class="sidebar-card">
-                            <h3>Popular Topics</h3>
-                            <ul class="topic-list">
-                                <li><a href="#">Adoption Stories</a></li>
-                                <li><a href="#">Training Tips</a></li>
-                                <li><a href="#">Health & Wellness</a></li>
-                                <li><a href="#">Foster Care</a></li>
-                                <li><a href="#">Volunteer Work</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="sidebar-card">
-                            <h3>Community Stats</h3>
-                            <div class="stats-list">
-                                <div class="stat-item">
-                                    <span class="stat-number">2,547</span>
-                                    <span class="stat-label">Members</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">1,239</span>
-                                    <span class="stat-label">Discussions</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">8,642</span>
-                                    <span class="stat-label">Comments</span>
+                                <div class="comment-input-area">
+                                    <input type="text" placeholder="Tulis komentar Anda..." class="comment-input"/>
+                                    <button class="btn-comment-send">Kirim</button>
                                 </div>
                             </div>
                         </div>
-                    </aside>
+                    </div>    
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About Pet Rescue</h3>
-                    <p>We are dedicated to rescuing, rehabilitating, and rehoming animals in need. Every life matters, and together we can make a difference.</p>
+    <div v-if="showPopup" class="popup">
+        <div class="popup__content">
+            <div class="form">
+                <h2>Buat Post Baru</h2>
+                <div class="form-group">
+                    <label for="kategori-post">Kategori</label>
+                    <select id="kategori-post" v-model="newPost.kategori" required>
+                        <option value="" disabled selected>Pilih Kategori</option>
+                        <option value="Kesehatan">Kesehatan</option>
+                        <option value="Perawatan">Perawatan</option>
+                        <option value="Nutrisi">Nutrisi</option>
+                        <option value="Adopsi">Adopsi</option>
+                        <option value="Perilaku">Perilaku</option>
+                        <option value="Tipsntrik">Tips & Trik</option>
+                    </select>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="/adoption">Adoption</a></li>
-                        <li><a href="/foster">Foster Home</a></li>
-                        <li><a href="/report">Report Animal</a></li>
-                        <li><a href="/articles">Articles</a></li>
-                    </ul>
+                <div class="form-group">
+                    <label for="judul">Judul Post</label>
+                    <input type="text" id="judul" v-model="newPost.judul" placeholder="Tulis judul yang menarik..." required />
                 </div>
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-contact">
-                        <li>📧 info@petrescue.org</li>
-                        <li>📞 +1 (555) 123-4567</li>
-                        <li>📍 123 Rescue Street, City, State</li>
-                    </ul>
+                <div class="form-group">
+                    <label for="isi">Isi Post</label>
+                    <textarea id="isi" v-model="newPost.isi" rows="5" placeholder="Tulis pertanyaan atau pengalaman..." required></textarea>
                 </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Twitter</a>
+            
+                <div class="form-group">
+                    <label for="foto">Upload Foto</label>
+                    <input type="file" id="foto" @change="handleFileUpload" accept="image/*" />
+                    <div v-if="newPost.foto" class="new-post-preview mt-2">
+                        <img :src="newPost.foto" alt="Pratinjau Foto" style="max-width: 100%; max-height: 150px; border-radius: 4px; display: block; margin-top: 10px;" />
                     </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Pet Rescue. All rights reserved. Made with 💚 for animals in need.</p>
+                <div class="modal-buttons">
+                    <button class="btn-posting" @click="submitPost">Posting</button>
+                    <button class="btn-batal" @click="showPopup = false">Batal</button>
+                </div>
             </div>
         </div>
-    </footer> -->
+    </div>  
 </template>
 
 <script>
-export default { name: 'CommunityView' }
+    export default {
+        name: "CommunityView",
+            data() {
+                return {
+                    showPopup: false,
+                    selectedCategory: "Semua Kategori",
+                    activePostIndexForComments: null,
+                    newPost: {
+                        kategori: "",
+                        judul: "",
+                        isi: "",
+                        foto: null, 
+                    },
+                    posts: [
+                        {
+                            user: "Rifa_danindra",
+                            avatar: "R",
+                            tanggal: "30/10/2025",
+                            kategori: "Kesehatan",
+                            foto: "/Post1.jpg", 
+                            judul: "Kucing saya tidak mau makan sejak 2 hari yang lalu, apa yang harus dilakukan?",
+                            isi: "Halo semuanya, kucing saya Luna (2 tahun) tiba-tiba tidak mau makan sejak 2 hari lalu. Dia masih minum air dan aktifbermain, tapi sama sekali tidak tertarik dengan makanannya. Sudah coba ganti makanan tapi tetap tidak mau. Ada yangpunya pengalaman serupa?",
+                            balasan: 2,
+                            suka: 67,
+                            comments: [ 
+                                { user: "Niha_april", text: "Coba bawa ke dokter hewan, bisa jadi kucingnya lagi stress." },
+                                { user: "PencintaKucing", text: "Setuju, lebih baik segera konsultasi ke vet. Dehidrasi bisa cepat terjadi!" }
+                            ]
+                        },
+                        {
+                            user: "Niha_april",
+                            avatar: "N",
+                            tanggal: "30/09/2025",
+                            kategori: "Perawatan",
+                            foto: null, 
+                            judul: "Tips memandikan kucing yang takut air",
+                            isi: "Kucing saya Milo sangat takut air. Setiap kali dimandikan selalu stress dan menggaruk-garuk. Adakah tips untuk memandikan kucing yang takut air? Atau alternatif lain untuk membersihkan kucing tanpa air?.",
+                            balasan: 2,
+                            suka: 67,
+                            comments: [ 
+                                { user: "UserA", text: "Mungkin bisa coba pakai kain lap basah (grooming wipes) yang khusus kucing, itu efektif kok!" },
+                                { user: "UserB", text: "Atau gunakan sampo kering (dry shampoo). Kucing saya juga takut air, ini sangat membantu." }
+                            ]
+                        },
+                        {
+                            user: "NaufalRizky_rabbani",
+                            avatar: "N",
+                            tanggal: "12/04/2025",
+                            kategori: "Perilaku",
+                            foto: null,
+                            judul: "Kucing saya tiba-tiba sering mengeong tengah malam, normal nggak ya?",
+                            isi: "Halo semuanya, aku mau curhat dikit nih. Kucing aku, namanya Coco (umur 1 tahun), akhir-akhir ini sering banget mengeongkeras tiap tengah malam. Kadang sampai aku kebangun karena suaranya. Siangnya dia biasa aja, aktif dan mau makan. Akuudah coba ganti jadwal makan dan main sebelum tidur, tapi tetep aja suka konser jam 2 pagi. Ada yang pernah ngalaminhal serupa? Ini tanda kangen, lapar, atau mungkin lagi birahi ya?.",
+                            balasan: 1,
+                            suka: 31,
+                            comments: [ 
+                                { user: "Maya_catmom", text: "Coba cek apakah ada birahi, biasanya kucing jantan/betina yang birahi memang lebih berisik di malam hari." },
+                            ]
+                        },
+                        {
+                            user: "Putri_11",
+                            avatar: "P",
+                            tanggal: "22/03/2025",
+                            kategori: "Perilaku",
+                            foto: "/Post4.jpg",
+                            judul: "Kucing aku tiba-tiba jadi manja banget setelah disteril, wajar nggak sih?",
+                            isi: "Hai semua pecinta kucing! Aku baru aja steril kucing betina aku minggu lalu. Setelah pulih, dia jadi manja banget. Biasanya nggak suka dipeluk, tapi sekarang nempel terus kayak bayangan. Aku senang sih, tapi agak bingung apakah ini efek dari steril atau cuma fase sementara aja. Ada yang punya pengalaman sama kayak gini?",
+                            balasan: 1,
+                            suka: 89,
+                            comments: [ 
+                                { user: "Doctor_vet", text: "Sangat wajar! Steril mengurangi hormon yang membuat kucing aktif berburu atau mencari pasangan, sehingga lebih fokus pada bonding dengan pemilik." },
+                            ]
+                        },
+                        {
+                            user: "Firda_rzk",
+                            avatar: "F",
+                            tanggal: "26/02/2025",
+                            kategori: "Kesehatan",
+                            foto: "/Post5.jpg",
+                            judul: "Kucing saya lesu dan tidak mau main, apakah harus dibawa ke dokter?",
+                            isi: "Halo semuanya, aku lagi khawatir banget. Kucing aku, Neko, dari kemarin kelihatan lesu banget. Biasanya aktif banget dan suka lari-lari, tapi sekarang cuma tiduran dan makannya juga berkurang. Suhunya agak hangat kalau aku pegang. Aku udah coba kasih air dan makanan kesukaannya, tapi tetap nggak terlalu tertarik. Kira-kira ini masih bisa dipantau di rumah atau sebaiknya langsung ke dokter hewan ya?",
+                            balasan: 1,
+                            suka: 52,
+                            comments: [ 
+                                { user: "Rifa_danindra", text: "Kalau sudah ada gejala lesu dan agak hangat, sebaiknya segera bawa ke dokter hewan. Jangan tunda ya!" },
+                            ]
+                        },
+
+                    ]
+                };
+            },
+            computed: {
+                filteredPosts() {
+                    if (this.selectedCategory === "Semua Kategori") {
+                        return this.posts;
+                    }
+                    return this.posts.filter(p => p.kategori === this.selectedCategory);
+                }
+            },
+      
+            methods: {
+                selectCategory(category){
+                    this.selectedCategory = category;
+                },
+                categoryClass(kategori) {
+                    switch (kategori) {
+                        case "Kesehatan": return "badge-kesehatan";
+                        case "Perawatan": return "badge-perawatan";
+                        case "Nutrisi": return "badge-nutrisi";
+                        case "Perilaku": return "badge-perilaku";
+                        case "Adopsi": return "badge-adopsi";
+                        case "Tipsntrik": 
+                        case "Tips & Trik": return "badge-tips"; 
+                        default: return "";
+                    }
+                },
+                toggleComments(index) {
+                    if (this.activePostIndexForComments === index) {
+                        this.activePostIndexForComments = null; 
+                    } else {
+                        this.activePostIndexForComments = index; 
+                    }
+                },
+                handleFileUpload(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.newPost.foto = e.target.result; 
+                        };
+                        reader.readAsDataURL(file); 
+                    } else {
+                        this.newPost.foto = null;
+                    }
+                },
+                submitPost() {
+                    if (!this.newPost.judul || !this.newPost.isi || !this.newPost.kategori) {
+                        alert("Lengkapi semua data sebelum posting!");
+                    return;
+                }
+                
+                const newPostData = {
+                    user: "Pengguna_Baru",
+                    avatar: "P",
+                    tanggal: new Date().toLocaleDateString("id-ID"),
+                    kategori: this.newPost.kategori,
+                    judul: this.newPost.judul,
+                    isi: this.newPost.isi,
+                    balasan: 0,
+                    suka: 0,
+                    foto: this.newPost.foto, 
+                    comments: [], 
+                };
+
+                this.posts.unshift(newPostData);
+
+                alert(`Post berhasil dikirim!\nJudul: ${this.newPost.judul}`);
+                this.showPopup = false;
+                this.newPost = { kategori: "", judul: "", isi: "", foto: null }; 
+                },
+            },
+            mounted() {
+            const dropdownBtn = document.getElementById("category-btn");
+            const dropdown = dropdownBtn?.closest(".dropdown");
+            const dropdownMenu = dropdown?.querySelector(".dropdown-menu");
+
+            if (dropdownBtn && dropdownMenu) {
+                dropdownBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    dropdown.classList.toggle("show");
+                });
+             
+            document.addEventListener("click", (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove("show");
+                }
+            });
+        }
+    },
+};
 </script>
 
 <style scoped>
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--dark-green);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.community-header-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.community-header-buttons .btn {
+  display: inline-flex;           
+  align-items: center;            
+  justify-content: center;        
+  gap: 0.5rem;                    
+  padding: 0.6rem 1.8rem;           
+  height: 45px;                    
+  line-height: 1;                 
+  font-weight: 600;
+  border-radius: 25px;
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: var(--white);
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 0.5rem 0;
+  min-width: 180px;
+  z-index: 10;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-black);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--light-cream);
+}
+
+.dropdown.show .dropdown-menu {
+  display: block;
+}
+
+.post-category-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-transform: capitalize;
+}
+
+.badge-kesehatan { background-color: #54ff9b; color: white; }   
+.badge-perawatan { background-color: #3498db; color: white; }   
+.badge-nutrisi { background-color: #e67e22; color: white; }     
+.badge-perilaku { background-color: #9b59b6; color: white; }   
+.badge-adopsi { background-color: #e84393; color: white; }      
+.badge-tips { background-color: #f1c40f; color: #333; } 
+
+
+.community-buttons .btn-primary {
+  background-color: var(--soft-green);
+  color: var(--white);
+}
+
+.community-buttons .btn-primary:hover {
+  background-color: var(--dark-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.post-content {
+    display: flex; 
+    gap: 20px;     
+    margin-bottom: 15px; 
+    align-items: flex-start; 
+    flex-wrap: wrap; 
+}
+
+.text-content {
+    flex: 2; 
+    min-width: 250px; 
+}
+
+.text-content p {
+    text-align: justify; /* RATA KANAN KIRI */
+    margin-top: 10px;    
+}
+
+.post-image-container {
+    flex: 1; 
+    min-width: 200px; 
+    max-width: 300px; 
+    max-height: 300px; 
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0; 
+}
+
+.post-image {
+    width: 100%;
+    height: 100%; 
+    display: block;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .post-content {
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .text-content, .post-image-container {
+        width: 100%; 
+        max-width: 100%;
+        min-width: unset;
+    }
+    .post-image-container {
+        margin-top: 15px; 
+    }
+}
+
+
+/* =========== CSS KOMENTAR (IG-Like & Ikon) =========== */
+.post-stat-clickable {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-black); 
+    transition: color 0.2s;
+}
+.post-stat-clickable:hover {
+    color: var(--dark-green);
+}
+
+.post-stat i.fa-comment {
+    color: var(--dark-green);
+    margin-right: 5px;
+}
+.post-stat i.fa-heart {
+    color: #e74c3c; 
+    margin-right: 5px;
+}
+
+.post-stat-clickable {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-black); 
+    transition: color 0.2s;
+}
+.post-stat-clickable:hover {
+    color: var(--dark-green);
+}
+
+/* WARNA IKON */
+.post-stat i.fa-comment {
+    color: var(--dark-green);
+    margin-right: 5px;
+}
+.post-stat i.fa-heart {
+    color: #e74c3c; /* Merah */
+    margin-right: 5px;
+}
+
+.comment-section {
+    margin-top: 15px;
+    background-color: var(--light-cream); 
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.comment-title h4 {
+    font-size: 1rem;
+    color: var(--dark-green);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 5px;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 250px; 
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 15px;
+}
+
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.no-comments {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    padding: 10px 0;
+}
+
+.comment-user-avatar {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    background-color: #d0d0d0;
+    color: var(--text-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.comment-body {
+    flex-grow: 1;
+    line-height: 1.4;
+}
+
+.comment-body strong {
+    color: var(--dark-green);
+    margin-right: 5px;
+    font-weight: 700;
+}
+
+.comment-input-area {
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--light-gray);
+}
+
+.comment-input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--light-gray);
+    font-size: 0.9rem;
+}
+
+.btn-comment-send {
+    background-color: var(--soft-green);
+    color: var(--white);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-comment-send:hover {
+    background-color: var(--dark-green);
+}
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup__content {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-posting,
+.btn-batal {
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.btn-posting {
+  background-color: var(--soft-green);
+  color: var(--text-black);
+}
+
+.btn-batal {
+  background-color: var(--light-gray);
+  color: var(--text-black);
+}
 </style>
