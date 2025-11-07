@@ -5,7 +5,6 @@ import ArticlesView from "../views/ArticlesView.vue";
 import ArticleDetailView from "../views/ArticleDetailView.vue";
 import CommunityView from "../views/CommunityView.vue";
 import DonationView from "../views/DonationView.vue";
-import FosterView from "../views/FosterView.vue";
 import ReportView from "../views/ReportView.vue";
 import SignupView from "../views/SignupView.vue";
 import LoginView from "../views/LoginView.vue";
@@ -26,7 +25,6 @@ const routes = [
   { path: "/articles/:id", component: ArticleDetailView },
   { path: "/community", component: CommunityView },
   { path: "/donation", component: DonationView },
-  { path: "/foster", component: FosterView },
   { path: "/hospital-shelter", component: HospitalShelter}, 
   { path: "/report", component: ReportView },
   { path: "/signup", component: SignupView },
