@@ -52,17 +52,28 @@
                         </div>
                         
                         <div class="post-footer">
-                            <span class="post-stat post-stat-clickable" @click="toggleComments(index)">
-                                <i class="fas fa-comment"></i> {{ post.balasan }} balasan
+                            <span v-if="post.comments.length > 0" class="post-stat post-stat-clickable" @click="toggleComments(index)">
+                                💬 {{ post.comments.length }} balasan
                             </span>
-                            <span class="post-stat">
-                                <i class="fas fa-heart"></i> {{ post.suka }} suka
+                            <span v-else class="post-stat post-stat-clickable" @click="toggleComments(index)">
+                                💬 0 balasan
+                            </span>
+                            
+                            <span
+                                class="post-stat post-stat-clickable like-area"
+                                @click="toggleLike(index)"
+                            >
+                                <span :class="['heart-icon', { liked: post.disukai }]">❤️</span>
+                                {{ post.suka }} suka
+                                <transition name="pop-heart">
+                                <span v-if="post.showHeart" class="heart-pop">❤️</span>
+                                </transition>
                             </span>
                         </div>
 
                             <div class="comment-section" v-if="activePostIndexForComments === index">
                                 <div class="comment-title">
-                                    <h4>{{ post.balasan }} Komentar</h4>
+                                    <h4>{{ post.comments.length }} Komentar</h4>
                                 </div>
                                 <div class="comment-list">
                                     <div class="comment-item" v-for="(comment, cIndex) in post.comments" :key="cIndex">
@@ -151,8 +162,9 @@
                             foto: "/Post1.jpg", 
                             judul: "Kucing saya tidak mau makan sejak 2 hari yang lalu, apa yang harus dilakukan?",
                             isi: "Halo semuanya, kucing saya Luna (2 tahun) tiba-tiba tidak mau makan sejak 2 hari lalu. Dia masih minum air dan aktifbermain, tapi sama sekali tidak tertarik dengan makanannya. Sudah coba ganti makanan tapi tetap tidak mau. Ada yangpunya pengalaman serupa?",
-                            balasan: 2,
                             suka: 67,
+                            disukai: false, 
+                            showHeart: false, 
                             comments: [ 
                                 { user: "Niha_april", text: "Coba bawa ke dokter hewan, bisa jadi kucingnya lagi stress." },
                                 { user: "PencintaKucing", text: "Setuju, lebih baik segera konsultasi ke vet. Dehidrasi bisa cepat terjadi!" }
@@ -166,8 +178,9 @@
                             foto: null, 
                             judul: "Tips memandikan kucing yang takut air",
                             isi: "Kucing saya Milo sangat takut air. Setiap kali dimandikan selalu stress dan menggaruk-garuk. Adakah tips untuk memandikan kucing yang takut air? Atau alternatif lain untuk membersihkan kucing tanpa air?.",
-                            balasan: 2,
                             suka: 67,
+                            disukai: false, 
+                            showHeart: false, 
                             comments: [ 
                                 { user: "UserA", text: "Mungkin bisa coba pakai kain lap basah (grooming wipes) yang khusus kucing, itu efektif kok!" },
                                 { user: "UserB", text: "Atau gunakan sampo kering (dry shampoo). Kucing saya juga takut air, ini sangat membantu." }
@@ -181,8 +194,9 @@
                             foto: null,
                             judul: "Kucing saya tiba-tiba sering mengeong tengah malam, normal nggak ya?",
                             isi: "Halo semuanya, aku mau curhat dikit nih. Kucing aku, namanya Coco (umur 1 tahun), akhir-akhir ini sering banget mengeongkeras tiap tengah malam. Kadang sampai aku kebangun karena suaranya. Siangnya dia biasa aja, aktif dan mau makan. Akuudah coba ganti jadwal makan dan main sebelum tidur, tapi tetep aja suka konser jam 2 pagi. Ada yang pernah ngalaminhal serupa? Ini tanda kangen, lapar, atau mungkin lagi birahi ya?.",
-                            balasan: 1,
                             suka: 31,
+                            disukai: false, 
+                            showHeart: false, 
                             comments: [ 
                                 { user: "Maya_catmom", text: "Coba cek apakah ada birahi, biasanya kucing jantan/betina yang birahi memang lebih berisik di malam hari." },
                             ]
@@ -195,8 +209,9 @@
                             foto: "/Post4.jpg",
                             judul: "Kucing aku tiba-tiba jadi manja banget setelah disteril, wajar nggak sih?",
                             isi: "Hai semua pecinta kucing! Aku baru aja steril kucing betina aku minggu lalu. Setelah pulih, dia jadi manja banget. Biasanya nggak suka dipeluk, tapi sekarang nempel terus kayak bayangan. Aku senang sih, tapi agak bingung apakah ini efek dari steril atau cuma fase sementara aja. Ada yang punya pengalaman sama kayak gini?",
-                            balasan: 1,
                             suka: 89,
+                            disukai: false, 
+                            showHeart: false, 
                             comments: [ 
                                 { user: "Doctor_vet", text: "Sangat wajar! Steril mengurangi hormon yang membuat kucing aktif berburu atau mencari pasangan, sehingga lebih fokus pada bonding dengan pemilik." },
                             ]
@@ -209,13 +224,26 @@
                             foto: "/Post5.jpg",
                             judul: "Kucing saya lesu dan tidak mau main, apakah harus dibawa ke dokter?",
                             isi: "Halo semuanya, aku lagi khawatir banget. Kucing aku, Neko, dari kemarin kelihatan lesu banget. Biasanya aktif banget dan suka lari-lari, tapi sekarang cuma tiduran dan makannya juga berkurang. Suhunya agak hangat kalau aku pegang. Aku udah coba kasih air dan makanan kesukaannya, tapi tetap nggak terlalu tertarik. Kira-kira ini masih bisa dipantau di rumah atau sebaiknya langsung ke dokter hewan ya?",
-                            balasan: 1,
                             suka: 52,
+                            disukai: false, 
+                            showHeart: false, 
                             comments: [ 
                                 { user: "Rifa_danindra", text: "Kalau sudah ada gejala lesu dan agak hangat, sebaiknya segera bawa ke dokter hewan. Jangan tunda ya!" },
                             ]
                         },
-
+                         {
+                            user: "Syahrul_",
+                            avatar: "S",
+                            tanggal: "07/11/2025",
+                            kategori: "Nutrisi",
+                            foto: null, 
+                            judul: "Bagaimana cara menjaga pola makan kucing agar tetap sehat?",
+                            isi: "Halo semuanya, saya ingin tahu bagaimana cara memastikan kucing saya mendapat nutrisi yang seimbang. Apakah lebih baik memberi makanan kering, basah, atau kombinasi keduanya? Saya ingin kucing saya tetap sehat dan tidak gampang bosan dengan makanannya.",
+                            suka: 1,
+                            disukai: false, 
+                            showHeart: false, 
+                            comments: [ ] 
+                        },
                     ]
                 };
             },
@@ -229,6 +257,20 @@
             },
       
             methods: {
+                // METHOD BARU DARI CONTOH
+                toggleLike(index) {
+                    const post = this.posts[index];
+                    if (post.disukai) {
+                        post.suka--;
+                        post.disukai = false;
+                    } else {
+                        post.suka++;
+                        post.disukai = true;
+                        post.showHeart = true;
+                        setTimeout(() => (post.showHeart = false), 600);
+                    }
+                },
+                // Method lama
                 selectCategory(category){
                     this.selectedCategory = category;
                 },
@@ -276,8 +318,9 @@
                     kategori: this.newPost.kategori,
                     judul: this.newPost.judul,
                     isi: this.newPost.isi,
-                    balasan: 0,
                     suka: 0,
+                    disukai: false, 
+                    showHeart: false, 
                     foto: this.newPost.foto, 
                     comments: [], 
                 };
@@ -401,6 +444,23 @@
 .badge-tips { background-color: #f1c40f; color: #333; } 
 
 
+.community-section {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.community-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-card {
+    position: relative;
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+
 .community-buttons .btn-primary {
   background-color: var(--soft-green);
   color: var(--white);
@@ -426,7 +486,7 @@
 }
 
 .text-content p {
-    text-align: justify; /* RATA KANAN KIRI */
+    text-align: justify; 
     margin-top: 10px;    
 }
 
@@ -463,45 +523,15 @@
     }
 }
 
-
-/* =========== CSS KOMENTAR (IG-Like & Ikon) =========== */
 .post-stat-clickable {
     cursor: pointer;
     font-weight: 600;
     color: var(--text-black); 
     transition: color 0.2s;
+    user-select: none; 
 }
 .post-stat-clickable:hover {
     color: var(--dark-green);
-}
-
-.post-stat i.fa-comment {
-    color: var(--dark-green);
-    margin-right: 5px;
-}
-.post-stat i.fa-heart {
-    color: #e74c3c; 
-    margin-right: 5px;
-}
-
-.post-stat-clickable {
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--text-black); 
-    transition: color 0.2s;
-}
-.post-stat-clickable:hover {
-    color: var(--dark-green);
-}
-
-/* WARNA IKON */
-.post-stat i.fa-comment {
-    color: var(--dark-green);
-    margin-right: 5px;
-}
-.post-stat i.fa-heart {
-    color: #e74c3c; /* Merah */
-    margin-right: 5px;
 }
 
 .comment-section {
@@ -598,6 +628,7 @@
     background-color: var(--dark-green);
 }
 
+/* ... Style Popup ... */
 .popup {
   position: fixed;
   inset: 0;
@@ -638,5 +669,50 @@
 .btn-batal {
   background-color: var(--light-gray);
   color: var(--text-black);
+}
+
+
+/* === STYLE BARU UNTUK 'LIKE' DARI CONTOH === */
+
+.like-area {
+  position: relative;
+}
+
+.heart-icon {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+  margin-right: 6px;
+  font-style: normal; /* Memastikan emoji tidak miring */
+}
+
+.heart-icon.liked {
+  color: #e74c3c;
+  transform: scale(1.3);
+}
+
+/* Efek hati pop-up */
+.heart-pop {
+  position: absolute;
+  top: -15px;
+  right: 20px; 
+  font-size: 1.2rem;
+  color: #e74c3c;
+  animation: pop-up 0.6s ease forwards;
+  font-style: normal;
+}
+
+@keyframes pop-up {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-25px);
+  }
 }
 </style>
