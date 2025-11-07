@@ -165,6 +165,31 @@ const lostCats = ref([
   background-color: var(--light-gray);
 }
 
+    .card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h3 {
+  font-size: 1.25rem;
+  color: var(--dark-green);
+  margin-bottom: 0.25rem;
+}
+
+.card-content .description {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  min-height: 40px;
+}
+
+.card-content .location {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
 
 /* OVERRIDE BUTTON CONTACT agar sesuai gambar */
 .btn-contact {
@@ -194,4 +219,5 @@ const lostCats = ref([
 }
 
 </style>
+
 
