@@ -45,7 +45,7 @@
             </div>
             <div class="creator-info">
               <h3>Niha April</h3>
-              <p class="role">UI/UX Designer</p>
+              <p class="role">fitur rumah sakit dan shelter serta selter</p>
               <p class="bio">
                 "Dalang di balik tampilan cantik dan pengalaman pengguna yang mulus. 
                 Memastikan setiap klik terasa intuitif dan menyenangkan."
@@ -58,8 +58,8 @@
               <img src="" alt="Foto Profil Tim 3">
             </div>
             <div class="creator-info">
-              <h3>RIfa danidra</h3>
-              <p class="role">Backend Developer</p>
+              <h3>Rifa danidra</h3>
+              <p class="role">fitur adopsi dan lapor kucing</p>
               <p class="bio">
                 "Menjaga agar server tetap berjalan, data aman, dan semua fitur 
                 bekerja dengan sihirnya di balik layar. Ahli database dan logika."
@@ -72,8 +72,8 @@
               <img src="https://images.pexels.com/photos/1643457/pexels-photo-1643457.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Foto Profil Tim 4">
             </div>
             <div class="creator-info">
-              <h3>Putri </h3>
-              <p class="role">Community & Content Lead</p>
+              <h3>Julia rahmawati </h3>
+              <p class="role">Fitur Komunitas</p>
               <p class="bio">
                 "Suara di balik Meong id. Menulis artikel, mengelola forum, 
                 dan memastikan komunitas kita tetap hangat dan suportif."
@@ -208,4 +208,5 @@
     padding: 0 1rem;
   }
 }
+
 </style>
