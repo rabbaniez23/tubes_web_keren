@@ -26,21 +26,15 @@
 
       <div class="lost-cats-grid">
         <Card v-for="cat in lostCats" :key="cat.id" class="lost-cat-card">
-          <template #image>
-            <img :src="cat.image" :alt="cat.name" class="card-image"/>
-          </template>
-
-          <template #title>
-             <h3 class="card-title" style="color: var(--dark-green); margin-bottom: 0.25rem;">{{ cat.name }}</h3>
-          </template>
-
-          <template #content>
+          <Card v-for="cat in lostCats" :key="cat.id" class="lost-cat-card">
+          <img :src="cat.image" :alt="cat.name" class="card-image"/>
+          <div class="card-content">
+            <h3>{{ cat.name }}</h3>
             <p class="description">{{ cat.description }}</p>
             <p class="location">Terakhir terlihat: **{{ cat.location }}**</p>
-          </template>
-
-          <template #actions>
             <button class="btn btn-contact btn-small">Hubungi orang</button>
+          </div>
+        </Card>
           </template>
           </div>
         </Card>
@@ -219,5 +213,6 @@ const lostCats = ref([
 }
 
 </style>
+
 
 
