@@ -27,7 +27,7 @@
           
           <div class="creator-card">
             <div class="creator-image-wrapper">
-              <img src="https://images.pexels.com/photos/1056251/pexels-photo-1056251.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Foto Naufal Rizki Rabbani">
+              <img src="/naufal.HEIC" alt="Foto Naufal Rizki Rabbani">
             </div>
             <div class="creator-info">
               <h3>Naufal Rizki Rabbani</h3>
@@ -233,3 +233,4 @@
   }
 }
 </style>
+
