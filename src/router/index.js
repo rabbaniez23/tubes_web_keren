@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AdoptionView from "../views/AdoptionView.vue";
 import ArticlesView from "../views/ArticlesView.vue";
-import ArticlesDetailView from "../views/ArticlesDetailView.vue";
+import ArticleDetailView from "../views/ArticleDetailView.vue";
 import CommunityView from "../views/CommunityView.vue";
 import DonationView from "../views/DonationView.vue";
 import FosterView from "../views/FosterView.vue";
