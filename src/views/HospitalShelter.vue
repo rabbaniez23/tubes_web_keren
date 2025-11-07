@@ -110,7 +110,7 @@ const places = [
     email: "info@rshjakarta.id",
     instagram: "https://instagram.com/rshjakarta",
     image: "/rs1.jpg",
-    map: "https://maps.app.goo.gl/yn5LjZasGbcHo6nm6"
+    map: "https://www.google.com/maps/place/Rumah+Sakit+Hewan+Jakarta/@-6.300805,106.820116,17z"
   },
   {
     name: "Cat Shelter Bandung",
@@ -345,4 +345,5 @@ const openDetail = (place) => {
   cursor: pointer;
 }
 </style>
+
 
