@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import AdoptionView from "../views/AdoptionView.vue";
 import ArticlesView from "../views/ArticlesView.vue";
+import ArticlesDetailView from "../views/ArticlesDetailView.vue";
 import CommunityView from "../views/CommunityView.vue";
 import DonationView from "../views/DonationView.vue";
 import FosterView from "../views/FosterView.vue";
@@ -19,6 +20,7 @@ const routes = [
   { path: "/", component: HomeView },
   { path: "/adoption", component: AdoptionView },
   { path: "/articles", component: ArticlesView },
+  { path: "/articles/:id", component: ArticleDetailView },
   { path: "/community", component: CommunityView },
   { path: "/donation", component: DonationView },
   { path: "/foster", component: FosterView },
