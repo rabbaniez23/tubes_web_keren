@@ -69,13 +69,13 @@
               <div class="modal-buttons">
                 <a :href="'tel:' + selectedPlace.phone" class="btn btn-primary">Hubungi</a>
               <a 
-  :href="selectedPlace.map" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  class="btn btn-secondary"
->
-  Lihat di Google Maps
-</a>
+                :href="selectedPlace.map" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="btn btn-secondary"
+              >
+                Lihat di Google Maps
+              </a>
 
               </div>
             </div>
@@ -122,7 +122,7 @@ const places = [
     email: "catshelterbdg@gmail.com",
     instagram: "https://instagram.com/catshelterbandung",
     image: "/shelter1.jpg",
-    map: "https://maps.app.goo.gl/abc"
+    map: "https://www.google.com/maps/place/Cihampelas,+Bandung"
   },
   {
     name: "Rumah Sakit Hewan Surabaya",
@@ -134,7 +134,7 @@ const places = [
     email: "rshsurabaya@gmail.com",
     instagram: "https://instagram.com/rshsurabaya",
     image: "/rs2.jpg",
-    map: "https://maps.app.goo.gl/bcd"
+    map: "https://www.google.com/maps/place/Rumah+Sakit+Hewan+Surabaya/@-7.3214865,112.739087"
   },
   {
     name: "Yogyakarta Cat Rescue",
@@ -146,7 +146,7 @@ const places = [
     email: "yogyacatrescue@gmail.com",
     instagram: "https://instagram.com/yogyacatrescue",
     image: "/shelter2.jpg",
-    map: "https://maps.app.goo.gl/cde"
+    map: "https://www.google.com/maps/place/Jl.+Kaliurang+KM+7,+Yogyakarta"
   },
   {
     name: "Rumah Sakit Hewan Semarang",
@@ -158,7 +158,7 @@ const places = [
     email: "info@rshsemarang.id",
     instagram: "https://instagram.com/rshsemarang",
     image: "/rs3.jpg",
-    map: "https://maps.app.goo.gl/efg"
+    map: "https://www.google.com/maps/place/Rumah+Sakit+Hewan+Banyumanik/@-7.050209,110.433417"
   },
   {
     name: "Bali Animal Shelter",
@@ -170,7 +170,7 @@ const places = [
     email: "balishelter@gmail.com",
     instagram: "https://instagram.com/balishelter",
     image: "/shelter3.jpg",
-    map: "https://maps.app.goo.gl/hij"
+    map: "https://www.google.com/maps/place/Jl.+Gatot+Subroto+Barat,+Denpasar"
   },
   {
     name: "Rumah Sakit Hewan Medan",
@@ -182,7 +182,7 @@ const places = [
     email: "rshmedan@gmail.com",
     instagram: "https://instagram.com/rshmedan",
     image: "/rs4.jpg",
-    map: "https://maps.app.goo.gl/jkl"
+    map: "https://www.google.com/maps/place/Rumah+Sakit+Hewan+Provinsi+Sumatera+Utara/@3.602176,98.657376"
   },
   {
     name: "Bogor Cat Rescue",
@@ -194,7 +194,7 @@ const places = [
     email: "bogorcatrescue@gmail.com",
     instagram: "https://instagram.com/bogorcatrescue",
     image: "/shelter4.jpg",
-    map: "https://maps.app.goo.gl/mno"
+    map: "https://www.google.com/maps/place/Jl.+Pajajaran+No.22,+Bogor"
   },
   {
     name: "Makassar Pet Care",
@@ -206,7 +206,7 @@ const places = [
     email: "petcaremakassar@gmail.com",
     instagram: "https://instagram.com/petcaremakassar",
     image: "/rs5.jpg",
-    map: "https://maps.app.goo.gl/pqr"
+    map: "https://www.google.com/maps/place/Jl.+Perintis+Kemerdekaan,+Makassar"
   }
 ];
 
@@ -345,5 +345,6 @@ const openDetail = (place) => {
   cursor: pointer;
 }
 </style>
+
 
 
