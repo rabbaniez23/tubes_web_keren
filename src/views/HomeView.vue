@@ -170,7 +170,6 @@ import Card from "../components/ui/Card.vue";
             <a href="/articles" class="read-more">Pelajari lebih lanjut →</a>
           </div>
         </div>  
-        
       </section>
 
       <!-- <section class="cta">
