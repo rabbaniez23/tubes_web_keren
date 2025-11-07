@@ -56,9 +56,8 @@ const router = useRouter()
 // Data pengguna saat ini (biasanya diambil dari store/API)
 // Kita gunakan data dummy untuk simulasi
 const currentUser = ref({
-  name: 'John Doe',
-  email: 'john.doe@meong.id',
-  photoUrl: 'https://via.placeholder.com/100?text=JD' // Placeholder
+  name: 'Kucing Oren',
+  email: 'oren@meong.id',
 })
 
 // Salinan data yang akan diedit
@@ -216,4 +215,5 @@ const saveProfile = () => {
     background-color: var(--light-gray);
     color: var(--text-black);
 }
+
 </style>
