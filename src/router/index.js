@@ -11,6 +11,7 @@ import LoginView from "../views/LoginView.vue";
 import ProfilView from "../views/ProfilView.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import AboutUsView from "../views/AboutUsView.vue";
+import LostCatView from "../views/LostCatView.vue";
 
 
 
@@ -27,6 +28,7 @@ const routes = [
   { path: "/profile", component: ProfilView },
   { path: "/forgot-password", component: ForgotPassword },
   { path: "/about-us", component: AboutUsView },
+  { path: "/lost-cats", component: LostCatView },
 ];
 
 const router = createRouter({
