@@ -12,7 +12,7 @@
         <li><RouterLink to="/">Beranda</RouterLink></li>
         <li><RouterLink to="/report">Lapor Kucing</RouterLink></li>
         <li><RouterLink to="/adoption">Adopsi Kucing</RouterLink></li>
-        <li><RouterLink to="/foster">Rumah Sakit/Shelter</RouterLink></li>
+       <li><RouterLink to="/hospital-shelter">Rumah Sakit/Shelter</RouterLink></li>
         <li><RouterLink to="/articles">Artikel</RouterLink></li>
         <li><RouterLink to="/community">Komunitas</RouterLink></li>
         <li><RouterLink to="/donation">Donasi</RouterLink></li>
@@ -118,4 +118,5 @@ import { RouterLink } from 'vue-router'
 .sidebar-nav a.router-link-exact-active {
   font-weight: 700;
 }
+
 </style>
