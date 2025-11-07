@@ -45,10 +45,10 @@ import { RouterLink } from 'vue-router'
 // Component Card, Button sudah di-register global di main.js
 
 const lostCats = ref([
-  { id: 1, name: 'Kuki', description: 'memiliki warna abu', location: 'Kemang, Jakarta Selatan', image: '/Kuki.jpeg' },
-  { id: 2, name: 'Putih', description: 'memiliki mata beda warna', location: 'Kemang, Jakarta Selatan', image: '/Putih.jpeg' },
-  { id: 3, name: 'Oyen', description: 'warna oranye, sedikit galak', location: 'Cilandak, Jakarta Selatan', image: '/Oyen.jpeg' },
-  { id: 4, name: 'Miko', description: 'Warna hitam, kalung merah', location: 'Duren Sawit, Jakarta Timur', image: '/Miko.jpeg' },
+  { id: 1, name: 'Kuki', description: 'memiliki warna abu', location: 'Kemang, Jakarta Selatan', image: '/public/Kuki.jpeg' },
+  { id: 2, name: 'Putih', description: 'memiliki mata beda warna', location: 'Kemang, Jakarta Selatan', image: '/public/Putih.jpeg' },
+  { id: 3, name: 'Oyen', description: 'warna oranye, sedikit galak', location: 'Cilandak, Jakarta Selatan', image: '/public/Oyen.jpeg' },
+  { id: 4, name: 'Miko', description: 'Warna hitam, kalung merah', location: 'Duren Sawit, Jakarta Timur', image: '/public/Miko.jpeg' },
 ])
 </script>
 
@@ -155,7 +155,7 @@ const lostCats = ref([
   background-color: var(--light-gray);
 }
 
-    .card-content {
+.card-content {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -179,7 +179,6 @@ const lostCats = ref([
   color: #888;
   margin-bottom: 1rem;
 }
-
 
 /* OVERRIDE BUTTON CONTACT agar sesuai gambar */
 .btn-contact {
@@ -207,9 +206,4 @@ const lostCats = ref([
     max-width: 100%;
   }
 }
-
 </style>
-
-
-
-
