@@ -66,7 +66,7 @@ const getInitials = (name) => {
 // }
 
 const editProfile = () => {
-  alert('Fitur "Edit Profil" belum dibuat!')
+    router.push('/profile/edit')
 }
 
 const handleLogout = () => {
@@ -169,4 +169,5 @@ console.log('ProfileView.vue <script setup> selesai.');
   background-color: #f9f9f9;
   border-top: 1px solid #eee;
 }
+
 </style>
