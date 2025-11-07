@@ -79,7 +79,7 @@ main, .footer {
 /* 3. Style untuk main saat sidebar TERBUKA */
 #app.logged-in-layout.sidebar-open main {
   /* Geser main ke kanan (sesuai angkamu) */
-  margin-left: px; 
+  margin-left: 115px; 
   padding-top: 0;
   padding: 0; 
 }
