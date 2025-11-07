@@ -110,12 +110,12 @@ const adoptablePets = ref([
     { 
         name: 'Hattoo', 
         description: 'Matanya punya dua warna', 
-        image: '/public/Hatto.jpeg'
+        image: '/Hatto.jpeg'
     },
     { 
         name: 'Abu', 
         description: 'Punya Warna Abu', 
-        image: '/public/Abu.jpeg' 
+        image: '/Abu.jpeg' 
         
     },
     // Data lainnya...
