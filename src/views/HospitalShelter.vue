@@ -34,7 +34,15 @@
 
               <div class="pet-buttons">
                 <a :href="'tel:' + place.phone" class="btn btn-primary btn-full">Hubungi</a>
-                <a :href="place.map" target="_blank" class="btn btn-secondary btn-full">Lihat di Google Maps</a>
+               <a 
+                    :href="place.map" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="btn btn-secondary btn-full"
+                  >
+                    Lihat di Google Maps
+                  </a>
+
               </div>
 
               <p class="lihat-detail" @click="openDetail(place)">Lihat detail →</p>
@@ -60,7 +68,15 @@
 
               <div class="modal-buttons">
                 <a :href="'tel:' + selectedPlace.phone" class="btn btn-primary">Hubungi</a>
-                <a :href="selectedPlace.map" target="_blank" class="btn btn-secondary">Lihat di Google Maps</a>
+              <a 
+  :href="selectedPlace.map" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  class="btn btn-secondary"
+>
+  Lihat di Google Maps
+</a>
+
               </div>
             </div>
           </div>
@@ -329,3 +345,4 @@ const openDetail = (place) => {
   cursor: pointer;
 }
 </style>
+
