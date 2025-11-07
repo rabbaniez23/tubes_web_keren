@@ -142,35 +142,55 @@ import Card from "../components/ui/Card.vue";
       </section>
 
       <!-- Section Artikel & Edukasi -->
-      <section class="article-section" id="artikel">
-        <h2>Artikel & Edukasi</h2>
-        <p class="subtext">
-          Bantu kamu dapat insight menarik dan edukasi seputar kucing
-        </p>
+    <section class="article-section" id="artikel">
+  <h2>Artikel & Edukasi</h2>
+  <p class="subtext">
+    Bantu kamu dapat insight menarik dan edukasi seputar kucing
+  </p>
 
-      <div class="article-cards">
-          <div class="card green">
-            <Card />
-            <img src="/artikel1.jpg" alt="Cara Merawat Kucing" />
-            <h3>Cara Merawat Kucing</h3>
-            <a href="/articles" class="read-more">Pelajari lebih lanjut →</a>
-          </div>
+  <div class="article-cards">
 
-          <div class="card blue">
-            <Card />
-            <img src="/artikel2.jpg" alt="Tips Kesehatan Kucing" />
-            <h3>Tips Kesehatan Kucing</h3>
-            <a href="/articles" class="read-more">Pelajari lebih lanjut →</a>
+    <div class="card green">
+      <figure>
+        <img src="/artikel1.jpg" alt="Cara Merawat Kucing" />
+      </figure>
+      <div class="card-body">
+        <h3>Cara Merawat Kucing</h3>
+        <p>Pelajari dasar-dasar merawat kucing agar tetap sehat...</p>
+        <div class="card-actions">
+          <RouterLink to="/articles/1" class="read-more">Pelajari lebih lanjut →</RouterLink>
           </div>
+      </div>
+    </div>
 
-          <div class="card blue">
-            <Card />
-            <img src="/artikel3.avif" alt="Kucing & Lingkungan" />
-            <h3>Kucing & Lingkungan</h3>
-            <a href="/articles" class="read-more">Pelajari lebih lanjut →</a>
-          </div>
-        </div>  
-      </section>
+    <div class="card blue">
+      <figure>
+        <img src="/artikel2.jpg" alt="Tips Kesehatan Kucing" />
+      </figure>
+      <div class="card-body">
+        <h3>Tips Kesehatan Kucing</h3>
+        <p>Tips singkat dan praktis untuk menjaga kesehatan anabul...</p>
+        <div class="card-actions">
+          <RouterLink to="/articles/2" class="read-more">Pelajari lebih lanjut →</RouterLink>
+        </div>
+      </div>
+    </div>
+
+    <div class="card blue">
+      <figure>
+        <img src="/artikel3.avif" alt="Kucing & Lingkungan" />
+      </figure>
+      <div class="card-body">
+        <h3>Kucing & Lingkungan</h3>
+        <p>Pahami bagaimana lingkungan mempengaruhi kenyamanan kucing...</p>
+        <div class="card-actions">
+          <RouterLink to="/articles/3" class="read-more">Pelajari lebih lanjut →</RouterLink>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
       <!-- <section class="cta">
             <div class="container">
