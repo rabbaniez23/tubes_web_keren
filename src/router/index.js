@@ -14,6 +14,8 @@ import ForgotPassword from "../views/ForgotPassword.vue";
 import AboutUsView from "../views/AboutUsView.vue";
 import LostCatView from "../views/LostCatView.vue";
 import HospitalShelter from "../views/HospitalShelter.vue"; 
+import EditProfilView from "../views/EditProfilView.vue";
+
 
 
 
@@ -30,6 +32,7 @@ const routes = [
   { path: "/signup", component: SignupView },
   { path: "/login", component: LoginView },
   { path: "/profile", component: ProfilView },
+  { path: "/profile/edit", component: EditProfilView },
   { path: "/forgot-password", component: ForgotPassword },
   { path: "/about-us", component: AboutUsView },
   { path: "/lost-cats", component: LostCatView },
