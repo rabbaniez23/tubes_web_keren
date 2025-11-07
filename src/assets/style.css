@@ -249,13 +249,11 @@ body {
 }
 
 /* Section Komunitas */
-/* ================================== */
-/* Ada beberapa yang aku ubah disini */
 .community-section {
   display: flex;
   flex-direction: column;
-  text-align: left;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   padding: 5rem 2rem;
   background: linear-gradient(to bottom, #f9f9f9, #fff);
 }
@@ -428,7 +426,7 @@ body {
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-items: flex-end;
     /* gap: 2rem; */
     margin-bottom: 2rem;
@@ -490,6 +488,7 @@ body {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    
 }
 
 .auth-container {
@@ -513,7 +512,7 @@ body {
 }
 
 .auth-form-section {
-    padding: 3rem;
+    padding: rem;
     
 }
 
@@ -811,28 +810,19 @@ body {
     padding: 4rem 0;
 }
 
-/* ========================= */
-/* Ada yang di ubah */
-/* ========================== */
 .community-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
 }
 
 .posts-container {
-  width: 100%;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-/* ==================================== */
-/* Ada yang di ubah */
 .post-card {
-    position: relative;
     background-color: var(--white);
     border: 1px solid var(--light-gray);
     border-radius: 15px;
@@ -1453,6 +1443,7 @@ body {
 
     .auth-image-section {
         display: none;
+        
     }
 
     .articles-grid {
